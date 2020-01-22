@@ -19,9 +19,12 @@ y_n = 0.0       # y atual
 theta_n = 0.0   # theta atual
 x0 = 0.0        # Guarda o x da posicao de retorno
 y0 = 0.0        # Guarda o y da posicao de retorno
-delta = 0.01    # Variacao minima na posicao para que o buffer seja atualizado
-tolerance = 0.2 # Tolerancia entre o ponto tido como objetivo e posicao de parada
-size = 5.0      # Distancia de retorno maxima
+
+# Parametros
+delta = rospy.get_param("delta")		# Variacao minima na posicao para que o buffer seja atualizado
+tolerance = rospy.get_param("tolerance")	# Tolerancia entre o ponto tido como objetivo e posicao de parada
+size = rospy.get_param("size")			# Distancia de retorno maxima
+odom_topic = rospy.get_param("odometria")	# Topico contendo a odometria do robo
 
 
 lost_signal = False
@@ -137,7 +140,7 @@ def position_return():
     # Topico com a flag que anuncia se o robo ja chegou no ponto desejado
     pub_flag = rospy.Publisher("/flag/distance_target", Bool, queue_size=1)
     # Topico com a odometria do robo
-    rospy.Subscriber("/tf", TFMessage, callback_pose)
+    rospy.Subscriber(odom_topic, TFMessage, callback_pose)
     # Flag que anuncia se o sinal foi perdido
     rospy.Subscriber("/flag/signal", Bool, callback_signal)
 
@@ -151,15 +154,15 @@ def position_return():
     y_n_previous = 0.0
 
     flag_position = True
-    
+
 	# Variavel auxiliar para controle de rotina
 	a = 1
-	
+
 	# Guarda a distancia em metros que o buffer tem armazenado
-    buffer_size = 0.0 
+    buffer_size = 0.0
 
     while not rospy.is_shutdown():
-	
+
         # Rotina realizada enquanto o sinal de radio nao foi perdido e o robo tiver chegado no ponto desejado
         while (lost_signal != True and flag_position == True):
             # Distancia entre (x,y) atual e anterior
@@ -183,19 +186,19 @@ def position_return():
                 continue
 
         # Caso o sinal de radio seja perdido:
-		
+
 		# Rotina feita somente uma vez quando o sinal é perdido
         if(lost_signal == True and a == 1):
             flag_position = False
             pub_flag.publish(flag_position)
-						
+
 			try:
 				# x0 e y0 sao as coord. do ponto de retorno
 				x0, y0 = (position_buffer[0][0], position_buffer[0][1])
-				
+
 			except:
 				print('A problem occurred creating the buffer')
-				
+
             traj_msg = create_traj_msg(position_buffer)
             pub_traj.publish(traj_msg)
             time.sleep(1.0)
@@ -209,10 +212,10 @@ def position_return():
         if distance < 1.0*tolerance:
             flag_position = True
             a = 1
-			
+
 			# Limpando o buffer
 			try:
-				del position_buffer[:] 
+				del position_buffer[:]
 				buffer_size = 0
 			except:
 				print('Buffer already empty')
@@ -235,7 +238,7 @@ if __name__ == '__main__':
     freq = 20.0  # Hz
 
     t_initial = time.time()
-    
+
     global pos, rpy
     pos = [0, 0, 0]
     rpy = [0, 0, 0]

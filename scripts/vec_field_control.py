@@ -20,6 +20,9 @@ flag = False
 lost_signal = False
 sinal = False
 
+# Topico contendo a odometria do robo
+odom_topic = rospy.get_param("odometria")
+
 def callback_flag(data):
     global flag
     flag = data.data
@@ -274,7 +277,7 @@ def controller():
     pub_cmd_vel = rospy.Publisher("/RosAria/cmd_vel", Twist, queue_size=1)
     rospy.init_node("vector_field")
     # Topico contendo a pose do robo
-    rospy.Subscriber("/tf", TFMessage, callback_pose)
+    rospy.Subscriber(odom_topic, TFMessage, callback_pose)
     # Topico contendo os pontos da trajetoria de retorno
     rospy.Subscriber("/return/traj_points", Polygon, callback_trajectory)
     # Topico com a flag que anuncia se o robo ja chegou no ponto desejado
