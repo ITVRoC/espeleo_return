@@ -151,15 +151,15 @@ def position_return():
     y_n_previous = 0.0
 
     flag_position = True
-    
+
 	# Variavel auxiliar para controle de rotina
 	a = 1
-	
+
 	# Guarda a distancia em metros que o buffer tem armazenado
-    buffer_size = 0.0 
+    buffer_size = 0.0
 
     while not rospy.is_shutdown():
-	
+
         # Rotina realizada enquanto o sinal de radio nao foi perdido e o robo tiver chegado no ponto desejado
         while (lost_signal != True and flag_position == True):
             # Distancia entre (x,y) atual e anterior
@@ -183,19 +183,19 @@ def position_return():
                 continue
 
         # Caso o sinal de radio seja perdido:
-		
+
 		# Rotina feita somente uma vez quando o sinal é perdido
         if(lost_signal == True and a == 1):
             flag_position = False
             pub_flag.publish(flag_position)
-						
+
 			try:
 				# x0 e y0 sao as coord. do ponto de retorno
 				x0, y0 = (position_buffer[0][0], position_buffer[0][1])
-				
+
 			except:
 				print('A problem occurred creating the buffer')
-				
+
             traj_msg = create_traj_msg(position_buffer)
             pub_traj.publish(traj_msg)
             time.sleep(1.0)
@@ -209,13 +209,13 @@ def position_return():
         if distance < 1.0*tolerance:
             flag_position = True
             a = 1
-			
+
 			# Limpando o buffer
 			try:
-				del position_buffer[:] 
+				del position_buffer[:]
 				buffer_size = 0
 			except:
-				print('Buffer already empty')
+				print('Buffer already empty!')
         elif a == 0:
             flag_position = False
 
@@ -235,7 +235,7 @@ if __name__ == '__main__':
     freq = 20.0  # Hz
 
     t_initial = time.time()
-    
+
     global pos, rpy
     pos = [0, 0, 0]
     rpy = [0, 0, 0]
