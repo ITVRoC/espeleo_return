@@ -61,6 +61,7 @@ def callback_pose(data):
             pos[2] = data.transforms[0].transform.translation.z
             rpy = euler
 
+
     return
 # ---------------------------------------------------------
 
@@ -69,6 +70,7 @@ def get_position():
     global position_buffer
     # Guarda o ponto (x,y) do robo no mundo
     position_buffer.append((x_n,y_n))
+    print position_buffer
 
 # --------------------------------------------------------
 
@@ -156,10 +158,10 @@ def position_return():
 
     flag_position = True
 
-	# Variavel auxiliar para controle de rotina
-	a = 1
+    # Variavel auxiliar para controle de rotina
+    a = 1
 
-	# Guarda a distancia em metros que o buffer tem armazenado
+    # Guarda a distancia em metros que o buffer tem armazenado
     buffer_size = 0.0
 
     while not rospy.is_shutdown():
@@ -174,31 +176,35 @@ def position_return():
                 x_n_previous = x_n
                 y_n_previous = y_n
                 buffer_size = buffer_size + distance_variation
+                print distance_variation
 
                 # Elimina a primeira posicao do buffer se ele ja estiver cheio
-                if buffer_size > size:
-                    position_buffer.pop(0)
+                if (buffer_size > size):
+                    print buffer_size, size
+		    position_buffer.pop(0)
+                    print "Poped"
                     get_position()
                 else:
                     get_position()
 
             else:
-				buffer_size = buffer_size + distance_variation
-                continue
+		# buffer_size = buffer_size + distance_variation
+		continue
 
         # Caso o sinal de radio seja perdido:
 
-		# Rotina feita somente uma vez quando o sinal é perdido
+		# Rotina feita somente uma vez quando o sinal eh perdido
         if(lost_signal == True and a == 1):
             flag_position = False
             pub_flag.publish(flag_position)
 
-			try:
-				# x0 e y0 sao as coord. do ponto de retorno
-				x0, y0 = (position_buffer[0][0], position_buffer[0][1])
-
-			except:
-				print('A problem occurred creating the buffer')
+            print position_buffer
+            try:
+		# x0 e y0 sao as coord. do ponto de retorno
+                x0, y0 = (position_buffer[0][0], position_buffer[0][1])
+			
+            except:
+            	print('A problem occurred creating the buffer')
 
             traj_msg = create_traj_msg(position_buffer)
             pub_traj.publish(traj_msg)
@@ -214,12 +220,12 @@ def position_return():
             flag_position = True
             a = 1
 
-			# Limpando o buffer
-			try:
-				del position_buffer[:]
-				buffer_size = 0
-			except:
-				print('Buffer already empty!')
+            # Limpando o buffer
+            try:
+		del position_buffer[:]
+		buffer_size = 0
+            except:
+		print('Buffer already empty')
         elif a == 0:
             flag_position = False
 
