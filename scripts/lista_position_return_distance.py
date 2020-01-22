@@ -19,9 +19,12 @@ y_n = 0.0       # y atual
 theta_n = 0.0   # theta atual
 x0 = 0.0        # Guarda o x da posicao de retorno
 y0 = 0.0        # Guarda o y da posicao de retorno
-delta = 0.01    # Variacao minima na posicao para que o buffer seja atualizado
-tolerance = 0.2 # Tolerancia entre o ponto tido como objetivo e posicao de parada
-size = 5.0      # Distancia de retorno maxima
+
+# Parametros
+delta = rospy.get_param("delta")		# Variacao minima na posicao para que o buffer seja atualizado
+tolerance = rospy.get_param("tolerance")	# Tolerancia entre o ponto tido como objetivo e posicao de parada
+size = rospy.get_param("size")			# Distancia de retorno maxima
+odom_topic = rospy.get_param("odometria")	# Topico contendo a odometria do robo
 
 
 lost_signal = False
@@ -137,7 +140,7 @@ def position_return():
     # Topico com a flag que anuncia se o robo ja chegou no ponto desejado
     pub_flag = rospy.Publisher("/flag/distance_target", Bool, queue_size=1)
     # Topico com a odometria do robo
-    rospy.Subscriber("/tf", TFMessage, callback_pose)
+    rospy.Subscriber(odom_topic, TFMessage, callback_pose)
     # Flag que anuncia se o sinal foi perdido
     rospy.Subscriber("/flag/signal", Bool, callback_signal)
 

@@ -1,5 +1,8 @@
 <launch>
 
+<!--Loading the parameters -->
+<rosparam command="load" file="$(find espeleo_return)/config/parameters.yaml" />
+
 
 <!--Run the node that saves the position -->
 <node pkg = "espeleo_return" name = "return" type = "lista_position_return_distance.py" args="" output="screen">
@@ -17,6 +20,6 @@
 <!--Run the teleop key of the turtlesim package>
 <!--node pkg = "turtlesim" name = "keyboard" type = "turtle_teleop_key" args="" output="screen"-->
 	<!--remap from="/turtle1/cmd_vel" to="/RosAria/cmd_vel"/-->
-</node-->
+<!--/node-->
 
 </launch>
