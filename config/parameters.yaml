@@ -11,4 +11,7 @@ size: 5.0
 odometria: '/tf'
 # odometria: '/robot_pose_ekf/odom_combined'
 # odometria: '/realsense/odom/sample'
-#
+
+# Child frame id
+# child_frame_id : 'base_link'
+child_frame_id : 'realsense_pose_frame'

@@ -20,8 +20,9 @@ flag = False
 lost_signal = False
 sinal = False
 
-# Topico contendo a odometria do robo
-odom_topic = rospy.get_param("odometria")
+# Parametros
+odom_topic = rospy.get_param("odometria")	# Topico contendo a odometria do robo
+frame = rospy.get_param("child_frame_id")	# Transformada que contem a odometria do robo
 
 def callback_flag(data):
     global flag
@@ -40,7 +41,7 @@ def callback_pose(data):
     global pos, rpy
 
     for T in data.transforms:
-        if (T.child_frame_id == "base_link"):
+        if (T.child_frame_id == frame):
 
             x_n = data.transforms[0].transform.translation.x  # posicao 'x' do robo no mundo
             y_n = data.transforms[0].transform.translation.y  # posicao 'y' do robo no mundo

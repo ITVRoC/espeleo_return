@@ -25,6 +25,7 @@ delta = rospy.get_param("delta")		# Variacao minima na posicao para que o buffer
 tolerance = rospy.get_param("tolerance")	# Tolerancia entre o ponto tido como objetivo e posicao de parada
 size = rospy.get_param("size")			# Distancia de retorno maxima
 odom_topic = rospy.get_param("odometria")	# Topico contendo a odometria do robo
+frame = rospy.get_param("child_frame_id")	# Transformada que contem a odometria do robo
 
 
 lost_signal = False
@@ -44,7 +45,7 @@ def callback_pose(data):
     global pos, rpy
 
     for T in data.transforms:
-        if (T.child_frame_id == "base_link"):
+        if (T.child_frame_id == frame):
 
             x_n = data.transforms[0].transform.translation.x  # posicao 'x' do robo no mundo
             y_n = data.transforms[0].transform.translation.y  # posicao 'y' do robo no mundo
