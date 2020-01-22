@@ -10,4 +10,5 @@ size: 5.0
 # Topico contendo a odometria do robo
 odometria: '/tf'
 # odometria: '/robot_pose_ekf/odom_combined'
-# odometria: '/realsense/pose/sample'
+# odometria: '/realsense/odom/sample'
+#
