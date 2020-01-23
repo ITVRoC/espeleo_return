@@ -193,7 +193,7 @@ def position_return():
 
         # Caso o sinal de radio seja perdido:
 
-		# Rotina feita somente uma vez quando o sinal eh perdido
+	# Rotina feita somente uma vez quando o sinal eh perdido
         if(lost_signal == True and a == 1):
             flag_position = False
             pub_flag.publish(flag_position)
