@@ -176,13 +176,10 @@ def position_return():
                 x_n_previous = x_n
                 y_n_previous = y_n
                 buffer_size = buffer_size + distance_variation
-                print distance_variation
 
                 # Elimina a primeira posicao do buffer se ele ja estiver cheio
                 if (buffer_size > size):
-                    print buffer_size, size
 		    position_buffer.pop(0)
-                    print "Poped"
                     get_position()
                 else:
                     get_position()
@@ -192,13 +189,12 @@ def position_return():
 		continue
 
         # Caso o sinal de radio seja perdido:
-
+	if lost_signal == True: flag_position = False
+		
 	# Rotina feita somente uma vez quando o sinal eh perdido
         if(lost_signal == True and a == 1):
-            flag_position = False
             pub_flag.publish(flag_position)
-
-            print position_buffer
+	
             try:
 		# x0 e y0 sao as coord. do ponto de retorno
                 x0, y0 = (position_buffer[0][0], position_buffer[0][1])
@@ -224,6 +220,9 @@ def position_return():
             try:
 		del position_buffer[:]
 		buffer_size = 0
+		x_n_previous = x_n
+                y_n_previous = y_n
+		
             except:
 		print('Buffer already empty')
         elif a == 0:
