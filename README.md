@@ -16,7 +16,7 @@ This repository contains the codes for the local autonomous navigation for radio
 When the radio connection is lost, this code implements the algorithm that makes the robot return autonomously to a certain point known to have a radio connection. In order to the code runs properly, it is needed to subscribe to the positions of the robot. The code now is implemented using position data from the topic /tf.
 
 **Topics:**
-Published Topics
+Published Topics:
 - `/cmd_vel`  (message type:`geometry_msgs.msg/Twist`)
 - `/return/traj_points` (message type:`geometry_msgs.msg/Polygon`)
 - `/visualization_marker_array` (message type:`visualization_msgs.msg/MarkerArray`)
@@ -28,8 +28,9 @@ Published Topics
 
 
 **Input parameters:**
-These parameters are found in the initial section of the script lista_position_return_distance.py
+The following parameters are found in the file parameters.yaml, inside the directory espeleo_return/config:
 - delta: Minimum variance in the position of the robot to record the new position.
 - tolerance: Tolerance between the final point of stop set by the array and the actual position of the robot.
 - size: Distance stored in the array in meters.
+- child_frame_id: Name of the transform which contains the robot pose.
 
