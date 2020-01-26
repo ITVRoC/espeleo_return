@@ -56,6 +56,7 @@ def callback_pose(data):
             pos[1] = data.transforms[0].transform.translation.y
             pos[2] = data.transforms[0].transform.translation.z
             rpy = euler
+            
 
     return
 
@@ -275,7 +276,7 @@ def controller():
     i = 0
 
     # pub_cmd_vel = rospy.Publisher("/cmd_vel", Twist, queue_size=1)
-    pub_cmd_vel = rospy.Publisher("/RosAria/cmd_vel", Twist, queue_size=1)
+    pub_cmd_vel = rospy.Publisher("/cmd_vel", Twist, queue_size=1)
     rospy.init_node("vector_field")
     # Topico contendo a pose do robo
     rospy.Subscriber(odom_topic, TFMessage, callback_pose)
