@@ -17,7 +17,7 @@
 <node pkg = "espeleo_return" name = "vector_field" type = "vec_field_control.py" args="" output="screen">
 </node>
 
-<!--Run the teleop key of the turtlesim package>
+<!--Run the teleop key of the turtlesim package-->
 <!--node pkg = "turtlesim" name = "keyboard" type = "turtle_teleop_key" args="" output="screen"-->
 	<!--remap from="/turtle1/cmd_vel" to="/RosAria/cmd_vel"/-->
 <!--/node-->
