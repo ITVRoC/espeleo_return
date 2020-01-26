@@ -13,13 +13,6 @@ odometria: '/tf'
 # odometria: '/realsense/odom/sample'
 
 # Child frame id
-<<<<<<< HEAD
-# child_frame_id : 'base_link'
-child_frame_id : "realsense_pose_frame"
-
-
-=======
 # child_frame_id: 'base_link'
 child_frame_id: 'realsense_pose_frame'
 # child_frame_id: 'EspeleoRobo'
->>>>>>> 44b91c7547744c957dd28e7f23ef1190fab2a338

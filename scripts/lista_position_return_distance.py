@@ -179,26 +179,26 @@ def position_return():
 
                 # Elimina a primeira posicao do buffer se ele ja estiver cheio
                 if (buffer_size > size):
-		    position_buffer.pop(0)
+		            position_buffer.pop(0)
                     get_position()
                 else:
                     get_position()
 
             else:
 		# buffer_size = buffer_size + distance_variation
-		continue
+                continue
 
-        # Caso o sinal de radio seja perdido:
+    # Caso o sinal de radio seja perdido:
 	if lost_signal == True: flag_position = False
-		
+
 	# Rotina feita somente uma vez quando o sinal eh perdido
         if(lost_signal == True and a == 1):
             pub_flag.publish(flag_position)
-	
+
             try:
-		# x0 e y0 sao as coord. do ponto de retorno
+                # x0 e y0 sao as coord. do ponto de retorno
                 x0, y0 = (position_buffer[0][0], position_buffer[0][1])
-			
+
             except:
             	print('A problem occurred creating the buffer')
 
@@ -218,15 +218,15 @@ def position_return():
 
             # Limpando o buffer
             try:
-		del position_buffer[:]
-		buffer_size = 0
-		x_n_previous = x_n
+                del position_buffer[:]
+                buffer_size = 0
+                x_n_previous = x_n
                 y_n_previous = y_n
-		
+
             except:
-		print('Buffer already empty')
-        elif a == 0:
-            flag_position = False
+                print('Buffer already empty')
+                elif a == 0:
+                flag_position = False
 
         pub_flag.publish(flag_position)
         rate.sleep()
