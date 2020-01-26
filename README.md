@@ -27,7 +27,8 @@ Published Topics:
 - `return.launch`
 
 
-**Input parameters:**
+## Input parameters
+
 The following parameters are found in the file parameters.yaml, inside the directory espeleo_return/config:
 - delta: Minimum variance in the position of the robot to record the new position.
 - tolerance: Tolerance between the final point of stop set by the array and the actual position of the robot.
