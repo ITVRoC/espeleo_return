@@ -368,7 +368,7 @@ if __name__ == '__main__':
 
     # Constant relative to the feedback linearization controller
     global d
-    d = -0.2 # ------------------------------SINAL--------------------------------------------------
+    d = -0.35 # ------------------------------SINAL--------------------------------------------------
 
     global has_trajectory_flag
     has_trajectory_flag = False

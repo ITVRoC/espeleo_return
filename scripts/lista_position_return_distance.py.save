@@ -70,6 +70,7 @@ def get_position():
     global position_buffer
     # Guarda o ponto (x,y) do robo no mundo
     position_buffer.append((x_n,y_n))
+    print position_buffer
 
 # --------------------------------------------------------
 
@@ -178,8 +179,7 @@ def position_return():
 
                 # Elimina a primeira posicao do buffer se ele ja estiver cheio
                 if (buffer_size > size):
-	            position_buffer.pop(0)
-                    get_position()
+		            position_buffer.p get_position()
                 else:
                     get_position()
 
@@ -192,8 +192,7 @@ def position_return():
 
 	# Rotina feita somente uma vez quando o sinal eh perdido
         if(flag_position == False and a == 1):
-	    pub_flag.publish(flag_position)
-            rospy.loginfo("Lost Signal")
+            pub_flag.publish(flag_position)
 
             try:
                 # x0 e y0 sao as coord. do ponto de retorno
@@ -215,7 +214,6 @@ def position_return():
         if distance < 1.0*tolerance:
             flag_position = True
             a = 1
-            rospy.loginfo("Goal reached")
 
             # Limpando o buffer
             try:
@@ -223,12 +221,10 @@ def position_return():
                 buffer_size = 0
                 x_n_previous = x_n
                 y_n_previous = y_n
-		rospy.loginfo("Cleaning the buffer")
 
             except:
                 print('Buffer already empty')
-
-	elif a == 0:
+                elif a == 0:
                 flag_position = False
 
         pub_flag.publish(flag_position)
