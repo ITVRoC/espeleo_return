@@ -1,11 +1,11 @@
 # Variacao minima na posicao para que o buffer seja atualizado
-delta: 0.01
+d_displacement_limit: 0.01
 
 # Tolerancia entre o ponto tido como objetivo e posicao de parada
-tolerance: 0.2
+d_tolerance: 0.2
 
 # Distancia de retorno maxima
-size: 5.0
+d_return: 5.0
 
 # Topico contendo a odometria do robo
 odometria: '/tf'
