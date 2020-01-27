@@ -188,11 +188,11 @@ def position_return():
 		# buffer_size = buffer_size + distance_variation
                 continue
 
-    # Caso o sinal de radio seja perdido:
+	# Caso o sinal de radio seja perdido:
 	if lost_signal == True: flag_position = False
 
 	# Rotina feita somente uma vez quando o sinal eh perdido
-        if(lost_signal == True and a == 1):
+        if(flag_position == False and a == 1):
             pub_flag.publish(flag_position)
 
             try:
