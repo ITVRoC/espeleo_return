@@ -23,7 +23,7 @@ y0 = 0.0        # Guarda o y da posicao de retorno
 # Parametros
 delta = rospy.get_param("d_displacement_limit")	# Variacao minima na posicao para que o buffer seja atualizado
 tolerance = rospy.get_param("d_tolerance")	# Tolerancia entre o ponto tido como objetivo e posicao de parada
-size = rospy.get_param("d_tolerance")		# Distancia de retorno maxima
+size = rospy.get_param("d_return")		# Distancia de retorno maxima
 odom_topic = rospy.get_param("odometria")	# Topico contendo a odometria do robo
 frame = rospy.get_param("child_frame_id")	# Transformada que contem a odometria do robo
 
