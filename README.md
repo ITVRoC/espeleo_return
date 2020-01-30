@@ -30,8 +30,8 @@ Published Topics:
 ## Input parameters
 
 The following parameters are found in the file parameters.yaml, inside the directory espeleo_return/config:
-- delta: Minimum variance in the position of the robot to record the new position.
-- tolerance: Tolerance between the final point of stop set by the array and the actual position of the robot.
-- size: Distance stored in the array in meters.
+- d_displacement_limit: Minimum variance in the position of the robot to record the new position.
+- d_tolerance: Tolerance between the final point of stop set by the array and the actual position of the robot.
+- d_return: Distance stored in the array in meters.
 - child_frame_id: Name of the transform which contains the robot pose.
 
