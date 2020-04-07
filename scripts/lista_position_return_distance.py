@@ -229,7 +229,7 @@ def position_return():
                 print('Buffer already empty')
 
 	elif a == 0:
-                flag_position = False
+            flag_position = False
 
         pub_flag.publish(flag_position)
         rate.sleep()
