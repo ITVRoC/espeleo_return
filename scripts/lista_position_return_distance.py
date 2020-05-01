@@ -151,9 +151,11 @@ def position_return():
     flag_position = Bool()
     flag_position = False
 
+    # Delay de 2 segundos
+    rospy.sleep(2.)
     # Variaveis pra guardar o ponto (x,y) anterior
-    x_n_previous = 0.0
-    y_n_previous = 0.0
+    x_n_previous = x_n
+    y_n_previous = y_n
 
     flag_position = True
 
