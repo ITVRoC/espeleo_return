@@ -1,18 +1,24 @@
-# Variacao minima na posicao para que o buffer seja atualizado
+# Minimum variance in the position of the robot to record the new position.
 d_displacement_limit: 0.01
 
-# Tolerancia entre o ponto tido como objetivo e posicao de parada
+# Tolerance between the final point of stop set by the array and the actual position of the robot.
 d_tolerance: 0.2
 
-# Distancia de retorno maxima
-d_return: 5.0
+# Maximum distance to return, stored in the array in meters.
+d_return: 10
 
-# Topico contendo a odometria do robo
-odometria: '/tf'
-# odometria: '/robot_pose_ekf/odom_combined'
-# odometria: '/realsense/odom/sample'
+# Intermediate distance to return repeatedly.
+d_intermediate: 3
 
-# Child frame id
-# child_frame_id: 'base_link'
-child_frame_id: 'realsense_pose_frame'
-# child_frame_id: 'EspeleoRobo'
+# Interface used to control the communication status in simulations.
+comms_interface_enable: 'True'
+
+# Topic used to obtain information about the position of the robot.
+odometry: '/tf'
+# odometry: '/robot_pose_ekf/odom_combined'
+# odometry: '/realsense/odom/sample'
+
+# Transform which contains the robot pose.
+child_frame_id: 'base_link'
+#child_frame_id: 'estimation'
+#child_frame_id: 'EspeleoRobo'
