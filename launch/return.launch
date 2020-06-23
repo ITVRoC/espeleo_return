@@ -3,23 +3,13 @@
 <!--Loading the parameters -->
 <rosparam command="load" file="$(find espeleo_return)/config/parameters.yaml" />
 
-
 <!--Run the node that saves the position -->
-<node pkg = "espeleo_return" name = "return" type = "lista_position_return_distance.py" args="" output="screen">
+<node pkg = "espeleo_return" name = "return" type = "autonomous_return.py" args="" output="screen">
 </node>
-
-
-<!--Run the node that controls the wheels -->
-<!--node pkg = "espeleo_return" name = "controller" type = "control_motors.py" args="" output="screen">
-</node-->
 
 <!--Run the node that controls the robot with vector fields -->
-<node pkg = "espeleo_return" name = "vector_field" type = "vec_field_control.py" args="" output="screen">
+<node pkg="espeleo_control" name="vector_field" type="vec_field_control.py" args="" output="screen">
+<rosparam command="load" file="$(find espeleo_return)/config/control_params.yaml"/>
 </node>
-
-<!--Run the teleop key of the turtlesim package-->
-<!-- node pkg = "turtlesim" name = "keyboard" type = "turtle_teleop_key" args="" output="screen"-->
-	<!--remap from="/turtle1/cmd_vel" to="/RosAria/cmd_vel"/-->
-<!--/node-->
 
 </launch>
